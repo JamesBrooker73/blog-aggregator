@@ -1,3 +1,4 @@
+import { User } from "src/lib/db/schema";
 import { setUser } from "../config";
 
 export type CommandHandler = (cmdName: string, ...args: string[]) => Promise<void>;
@@ -15,3 +16,9 @@ export async function runCommand(registry: CommandsRegistry, cmdName: string, ..
   }
   await handler(cmdName, ...args);
 }
+
+export type UserCommandHandler = (
+  cmdName: string,
+  user: User,
+  ...args: string[]
+) => Promise<void> | void;
